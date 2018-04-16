@@ -1,0 +1,114 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Mappings:
+  Environment:
+    testing:
+      DomainName: "test.testing"
+    acceptance:
+      DomainName: "test.acceptance"
+    production:
+      DomainName: "test.productions"
+Resources:
+  Alphabetically:
+    Type: "AWS::IAM::Role"
+  ApplicationLoadBalancerCertificate:
+    Type: "AWS::CertificateManager::Certificate"
+    Properties:
+      DomainName: !FindInMap ["Environment", !Ref "Environment", "DomainName"]
+      Tags:
+        - Key: "Name"
+          Value: !FindInMap ["Environment", !Ref "Environment", "DomainName"]
+        - Key: "AppGroup"
+          Value: "unit-test"
+        - Key: "AppRole"
+          Value: "certificate"
+        - Key: "Environment"
+          Value: !Ref "Environment"
+  BestDhcpOptions:
+    Type: "AWS::EC2::DHCPOptions"
+    Properties:
+      DomainName: "eu-west-1.compute.internal"
+      DomainNameServers:
+        - "AmazonProvidedDNS"
+      Tags:
+        - Key: "Name"
+          Value: "dhcp-options"
+        - Key: "AppGroup"
+          Value: "unit-test"
+        - Key: "AppRole"
+          Value: "dhcp-options"
+  LaunchConfiguration:
+    Type: "AWS::AutoScaling::LaunchConfiguration"
+    Properties:
+      AssociatePublicIpAddress: false
+      BlockDeviceMappings:
+        - DeviceName: "/dev/sda1"
+          Ebs:
+            VolumeSize: "100"
+            VolumeType: "gp2"
+      Tags:
+        - Key: "Name"
+          Value: "auto-scaling"
+        - Key: "AppGroup"
+          Value: "unit-test"
+        - Key: "AppRole"
+          Value: "volumne-type"
+  Ordered:
+    Type: "AWS::IAM::Role"
+  S3VersionedBucket:
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: "Retain"
+    Properties:
+      BucketName: "s3-bucket-with-versioning"
+      LoggingConfiguration:
+        DestinationBucketName: "s3-accesslogs"
+        LogFilePrefix: "s3-bucket-with-versioning/"
+      VersioningConfiguration:
+        Status: "Enabled"
+      Tags:
+        - Key: "Name"
+          Value: !Sub "coolblue-${Environment}-octopus-deploy"
+        - Key: "AppGroup"
+          Value: "octopus-deploy"
+        - Key: "AppRole"
+          Value: "storage"
+        - Key: "Environment"
+          Value: !Ref "Environment"
+  TestHostedZone:
+    Type: "AWS::Route53::HostedZone"
+    Properties:
+      Name: "unit.test"
+      HostedZoneTags:
+        - Key: "Name"
+          Value: "a-dns-entry"
+        - Key: "AppGroup"
+          Value: "unit-test"
+        - Key: "AppRole"
+          Value: "dns-record"
+  ZapplicationLoadBalancerCertificate:
+    Type: "AWS::CertificateManager::Certificate"
+    Properties:
+      DomainName: "some-domain.eu"
+      DomainValidationOptions:
+        - DomainName: "some-domain.eu"
+          ValidationDomain: "some-domain.eu"
+      Tags:
+        - Key: "Name"
+          Value: "some-domain.eu"
+        - Key: "AppGroup"
+          Value: "app-group"
+        - Key: "AppRole"
+          Value: "certificate"
+  ZzapplicationLoadBalancerCertificate:
+    Type: "AWS::CertificateManager::Certificate"
+    Properties:
+      DomainName: "some-domain.eu"
+      DomainValidationOptions:
+        - DomainName: "some-domain.eu"
+          ValidationDomain: "some-domain.eu"
+      Tags:
+        - Key: "Name"
+          Value: !Ref "some-domain.eu"
+        - Key: "AppGroup"
+          Value: !Ref "app-group"
+        - Key: "AppRole"
+          Value: !Ref "certificate"
