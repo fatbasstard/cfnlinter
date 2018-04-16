@@ -5,10 +5,10 @@ from collections import OrderedDict
 from cfnlint.core.lintrules import LintRules
 from cfnlint.core.linter import Linter
 
-def linter(file_path):
+def linter(file_path, custom_ruleset=None):
     __setup_yaml_module()
 
-    errors = __lint_file(file_path)
+    errors = __lint_file(file_path, custom_ruleset)
 
     return errors
 
