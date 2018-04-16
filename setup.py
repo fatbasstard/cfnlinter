@@ -1,9 +1,14 @@
 from setuptools import setup, find_packages
 
+# Custom readme file for pypi
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
 setup(name='cfnlint',
-      version='0.0.3',
+      version='0.0.8',
       description='AWS Cloudformation linter',
-      long_description='',
+      long_description=readme(),
       classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',

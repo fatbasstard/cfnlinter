@@ -1,5 +1,12 @@
 # cfnlinter
-AWS Cloudformation linter
+
+The `cfnlint` package is an AWS CloudFormation linter that uses the [AWS CloudFormation Resource Specification](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-resource-specification.html) and is customizable and extendible with a custom ruleset.
+
+Package is available through [`pip`](https://pypi.org/project/cfnlint/):
+
+```
+pip install cfnlint
+```
 
 ## Current features
 
