@@ -1,7 +1,7 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(name='cfnlint',
-      version='0.0.1',
+      version='0.0.3',
       description='AWS Cloudformation linter',
       long_description='',
       classifiers=[
@@ -14,7 +14,7 @@ setup(name='cfnlint',
       author='Frank van Boven',
       author_email='frank@cenotaph.nl',
       license='GNU GPL 2.0',
-      packages=['cfnlint'],
+      packages=find_packages(exclude=['tests*']),
       python_requires='>=3',
       install_requires=[
           'click',

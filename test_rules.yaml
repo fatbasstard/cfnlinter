@@ -1,0 +1,9 @@
+Resources:
+  AWS::AutoScaling::LaunchConfiguration:
+  AWS::IAM::Role:
+  AWS::CertificateManager::Certificate:
+  AWS::Route53::HostedZone:
+  AWS::S3::Bucket:
+    Properties:
+      BucketEncryption:
+  AWS::EC2::DHCPOptions:

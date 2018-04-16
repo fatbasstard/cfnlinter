@@ -13,6 +13,17 @@ AWS Cloudformation linter
 * Lint against specific region
 * Add Pluggable system to add custom resource handlers for special/extended rules
 
+### Roadmap
+
+Current planned roadmap:
+
+Version | Functionality
+--------|--------------
+0.1.x   | Initialize release with basic functionality (yaml only). Customisation: <ul><li>Allowed resources</li><li>Override `required` properties</li><li>Enumerators (Allowed values)</li><li>Top-level property support only</li></ul>
+0.2.x   | Add json support. Customisation:<ul><li>Additional documentation URL</li><li>Regular Expression support</li><li>Sub-properties support</li></ul>
+0.3.x   | ?
+
+
 
 ### Setup Virtual Environment
 Optional but recommended. Example:
