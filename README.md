@@ -1,0 +1,2 @@
+# cfnlinter
+AWS Cloudformation linter
