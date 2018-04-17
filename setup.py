@@ -6,7 +6,7 @@ def readme():
         return f.read()
 
 setup(name='cfnlint',
-      version='0.0.8',
+      version='0.0.9',
       description='AWS Cloudformation linter',
       long_description=readme(),
       classifiers=[
@@ -15,7 +15,7 @@ setup(name='cfnlint',
         'Programming Language :: Python :: 3.6',
       ],
       keywords='AWS CloudFormation Linter yaml json',
-      url='http://github.com/fatbasstard/cfnlint',
+      url='http://github.com/fatbasstard/cfnlinter',
       author='Frank van Boven',
       author_email='frank@cenotaph.nl',
       license='GNU GPL 2.0',
